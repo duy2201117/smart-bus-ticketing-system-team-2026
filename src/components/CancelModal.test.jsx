@@ -13,7 +13,9 @@ describe("CancelModal", () => {
     );
 
     expect(
-      screen.getByText("Xác nhận hủy vé?")
+      screen.getByRole("dialog", {
+        name: /Bạn muốn hủy vé này/i
+      })
     ).toBeInTheDocument();
   });
 
@@ -27,11 +29,11 @@ describe("CancelModal", () => {
     );
 
     expect(
-      screen.queryByText("Xác nhận hủy vé?")
+      screen.queryByRole("dialog")
     ).not.toBeInTheDocument();
   });
 
-  it("gọi onConfirm khi bấm Đồng ý", () => {
+  it("gọi onConfirm khi bấm Hủy vé", () => {
     const onConfirm = vi.fn();
 
     render(
@@ -44,14 +46,14 @@ describe("CancelModal", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "Đồng ý"
+        name: /Hủy vé/i
       })
     );
 
     expect(onConfirm).toHaveBeenCalledTimes(1);
   });
 
-  it("gọi onClose khi bấm Đóng", () => {
+  it("gọi onClose khi bấm Giữ vé", () => {
     const onClose = vi.fn();
 
     render(
@@ -64,7 +66,7 @@ describe("CancelModal", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "Đóng"
+        name: /Giữ vé/i
       })
     );
 
