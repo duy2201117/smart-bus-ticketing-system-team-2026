@@ -1,8 +1,6 @@
-# Hoàng Trung Hiếu — Test Workstream Tracking
+# Phạm Trung Hiếu — Test Workstream Tracking
 
-Theo yêu cầu hiện tại của nhóm, workstream này được theo dõi dưới tên **Hoàng Trung Hiếu** và được **Luân Khánh Duy (`duy2201117`) thực hiện thay**.
-
-> Lưu ý đối chiếu: bảng Sprint gốc đang ghi các dòng tester tương ứng dưới tên **Phạm Trung Hiếu**. Tài liệu này giữ nguyên sự khác biệt đó để không sửa giả lịch sử phân công.
+Workstream này được theo dõi đúng theo tên trong bảng Sprint gốc là **Phạm Trung Hiếu** và được **Luân Khánh Duy (`duy2201117`) thực hiện thay**.
 
 ## Sprint 1
 - Kiểm thử seat map.
