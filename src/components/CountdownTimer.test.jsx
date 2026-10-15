@@ -178,55 +178,41 @@ describe("CountdownTimer", () => {
     );
   });
 
-  it(
-    "hết 10 phút thì hủy giữ chỗ và trả ghế",
-    async () => {
-      const onExpired = vi.fn();
+  it("hết 10 phút thì hủy giữ chỗ và trả ghế", () => {
+    const onExpired = vi.fn();
 
-      render(
-        <CountdownTimer
-          seat="A03"
-          onExpired={onExpired}
-          onPaymentSuccess={() => {}}
-        />
-      );
+    render(
+      <CountdownTimer
+        seat="A03"
+        onExpired={onExpired}
+        onPaymentSuccess={() => {}}
+      />
+    );
 
-      expect(
-        screen.getByText("10:00")
-      ).toBeInTheDocument();
+    expect(
+      screen.getByText("10:00")
+    ).toBeInTheDocument();
 
-      /*
-       * useCountdown sử dụng setTimeout
-       * từng giây.
-       *
-       * Vì vậy test chạy từng timer
-       * theo đúng chu kỳ React thay vì
-       * nhảy thẳng 600000ms.
-       */
-      for (let i = 0; i < 600; i++) {
-        await act(async () => {
-          await vi.advanceTimersByTimeAsync(
-            1000
-          );
-        });
-      }
+    // useCountdown dùng một interval ổn định nên fake timer
+    // có thể mô phỏng trọn 10 phút trong một lần act.
+    act(() => {
+      vi.advanceTimersByTime(600000);
+    });
 
-      expect(
-        onExpired
-      ).toHaveBeenCalledTimes(1);
+    expect(
+      onExpired
+    ).toHaveBeenCalledTimes(1);
 
-      expect(
-        window.alert
-      ).toHaveBeenCalledWith(
-        "Thời gian giữ ghế A03 đã hết. Ghế đã được trả về trạng thái trống."
-      );
+    expect(
+      window.alert
+    ).toHaveBeenCalledWith(
+      "Thời gian giữ ghế A03 đã hết. Ghế đã được trả về trạng thái trống."
+    );
 
-      expect(
-        screen.getByRole("button", {
-          name: "Thanh toán thành công"
-        })
-      ).toBeDisabled();
-    },
-    15000
-  );
+    expect(
+      screen.getByRole("button", {
+        name: "Thanh toán thành công"
+      })
+    ).toBeDisabled();
+  });
 });
