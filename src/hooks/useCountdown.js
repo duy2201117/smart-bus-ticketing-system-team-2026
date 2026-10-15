@@ -10,28 +10,23 @@ export default function useCountdown(
 
   useEffect(() => {
     // Dừng countdown nếu thanh toán thành công
-    // hoặc thời gian đã hết.
-    if (!isRunning || time <= 0) {
+    if (!isRunning) {
       return;
     }
 
-    // Dùng một interval ổn định thay vì tạo lại
-    // setTimeout sau mỗi lần render. Functional update
-    // giúp countdown chính xác và test fake timer có thể
-    // nhảy cả khoảng thời gian dài trong một lần.
-    const timer = setInterval(() => {
-      setTime((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
+    // Không chạy tiếp khi hết thời gian
+    if (time <= 0) {
+      return;
+    }
 
-        return prev - 1;
-      });
+    const timer = setTimeout(() => {
+      setTime((prev) =>
+        Math.max(prev - 1, 0)
+      );
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [isRunning]);
+    return () => clearTimeout(timer);
+  }, [time, isRunning]);
 
   return time;
 }
