@@ -29,11 +29,30 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Frontend tests
-        run: npm test
+      - name: Test CancelModal
+        if: always()
+        run: npx vitest run src/components/CancelModal.test.jsx
+
+      - name: Test ChangeTripModal
+        if: always()
+        run: npx vitest run src/components/ChangeTripModal.test.jsx
+
+      - name: Test CountdownTimer
+        if: always()
+        run: npx vitest run src/components/CountdownTimer.test.jsx
+
+      - name: Test SelectSeat
+        if: always()
+        run: npx vitest run src/pages/SelectSeat.test.jsx
+
+      - name: Test ticketService
+        if: always()
+        run: npx vitest run src/services/ticketService.test.js
 
       - name: Server tests
+        if: always()
         run: npm run test:server
 
       - name: Production build
+        if: always()
         run: npm run build
