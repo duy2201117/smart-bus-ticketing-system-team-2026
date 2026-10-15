@@ -7,9 +7,7 @@
 - `feature/truong-khanh-duy` — phạm vi công việc Trương Khánh Duy (Luân Khánh Duy trực tiếp triển khai thay).
 - `feature/trieu-thanh-duy` — phạm vi công việc Triệu Thanh Duy (Luân Khánh Duy trực tiếp triển khai thay).
 - `test/hoang-manh-duy` — phạm vi kiểm thử Hoàng Mạnh Duy (Luân Khánh Duy trực tiếp triển khai thay).
-- `test/hoang-trung-hieu` — nhánh theo tên người dùng yêu cầu.
-
-> Lưu ý: tài liệu Sprint 1–4 trong gói đề đang ghi **Phạm Trung Hiếu** cho nhiều task Tester, không phải **Hoàng Trung Hiếu**. Không nên sửa tên trong lịch sử/báo cáo nếu chưa xác nhận với nhóm/giảng viên.
+- `test/pham-trung-hieu` — phạm vi kiểm thử Phạm Trung Hiếu (Luân Khánh Duy trực tiếp triển khai thay).
 
 ## Git Flow
 
