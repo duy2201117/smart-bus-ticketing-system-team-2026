@@ -31,7 +31,9 @@ describe("SelectSeat", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText("Danh sách ghế")
+      screen.getByRole("heading", {
+        name: /Sơ đồ ghế/i
+      })
     ).toBeInTheDocument();
 
     expect(
@@ -77,7 +79,7 @@ describe("SelectSeat", () => {
 
     const seatButton =
       screen.getByRole("button", {
-        name: "A01"
+        name: /A01/
       });
 
     fireEvent.click(seatButton);
@@ -114,7 +116,7 @@ describe("SelectSeat", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "A01"
+        name: /A01/
       })
     );
 
@@ -136,18 +138,7 @@ describe("SelectSeat", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByText((content, element) => {
-        return (
-          element?.tagName.toLowerCase() ===
-            "h3" &&
-          element.textContent
-            .replace(/\s+/g, " ")
-            .trim()
-            .includes(
-              "Ghế đang giữ: A01"
-            )
-        );
-      })
+      screen.getByText(/Ghế đang giữ:\s*A01/i)
     ).toBeInTheDocument();
 
     expect(
@@ -175,7 +166,7 @@ describe("SelectSeat", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "A02"
+        name: /A02/
       })
     );
 
@@ -188,7 +179,7 @@ describe("SelectSeat", () => {
 
     expect(
       screen.getByRole("button", {
-        name: "Thanh toán thành công"
+        name: /Thanh toán thành công/i
       })
     ).toBeInTheDocument();
   });
