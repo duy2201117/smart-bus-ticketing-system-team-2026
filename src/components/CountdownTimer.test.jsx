@@ -112,7 +112,7 @@ describe("CountdownTimer", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "Thanh toán thành công"
+        name: /Thanh toán thành công/i
       })
     );
 
@@ -146,7 +146,7 @@ describe("CountdownTimer", () => {
 
     fireEvent.click(
       screen.getByRole("button", {
-        name: "Thanh toán thành công"
+        name: /Thanh toán thành công/i
       })
     );
 
@@ -195,14 +195,6 @@ describe("CountdownTimer", () => {
         screen.getByText("10:00")
       ).toBeInTheDocument();
 
-      /*
-       * useCountdown sử dụng setTimeout
-       * từng giây.
-       *
-       * Vì vậy test chạy từng timer
-       * theo đúng chu kỳ React thay vì
-       * nhảy thẳng 600000ms.
-       */
       for (let i = 0; i < 600; i++) {
         await act(async () => {
           await vi.advanceTimersByTimeAsync(
@@ -223,7 +215,7 @@ describe("CountdownTimer", () => {
 
       expect(
         screen.getByRole("button", {
-          name: "Thanh toán thành công"
+          name: /Thanh toán thành công/i
         })
       ).toBeDisabled();
     },
