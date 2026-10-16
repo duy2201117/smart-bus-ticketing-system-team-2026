@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-const source = readFileSync(new URL('./ComplaintsPage.jsx', import.meta.url), 'utf8');
+const source = readFileSync(resolve(process.cwd(), 'src/features/passenger/ComplaintsPage.jsx'), 'utf8');
 
 describe('ComplaintsPage - final US24 frontend completion', () => {
   it('preserves the original complaint submit and response-status flow', () => {
