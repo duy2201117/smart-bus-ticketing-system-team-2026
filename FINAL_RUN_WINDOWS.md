@@ -1,23 +1,52 @@
 # Chạy bản FINAL trên Windows
 
-Mở PowerShell tại đúng thư mục có `package.json`, sau đó chạy:
+Mở PowerShell tại đúng thư mục có `package.json`.
+
+## 1. Cài dependency
 
 ```powershell
 npm install
-npm run test:server
+```
+
+## 2. Chạy bộ kiểm tra giống CI
+
+```powershell
+npm run lint
 npm test
+npm run test:server
 npm run build
+```
+
+Workflow GitHub Actions của bản chốt đã chạy thành công các bước tương ứng: cài dependency, lint, frontend tests, server tests và production build.
+
+## 3. Chạy E2E thủ công
+
+Playwright E2E không nằm trong workflow CI hiện tại. Khi cần demo/kiểm tra toàn luồng trên máy Windows:
+
+```powershell
 npx playwright install chromium
 npm run test:e2e
+```
+
+Suite E2E bao phủ các flow Passenger/Driver/Manager/Admin và các viewport responsive chính.
+
+## 4. Chạy ứng dụng
+
+```powershell
 npm run dev:full
 ```
 
-Nếu project được giải nén lồng `SmartBusFrontend\SmartBusFrontend`, hãy mở terminal tại thư mục con có `package.json`.
+Hoặc:
 
-## Kết quả audit đã xác nhận
+```powershell
+npm run dev
+```
 
-- Backend/unit suite trong môi trường audit: **9/9 PASS**.
-- Các test bao phủ API/RBAC, seat hold/race, sandbox payment signed callback, refund, QR replay, private discount evidence, voucher race, GPS/ETA, analytics/backtest và seed 60 ngày.
-- Playwright E2E + responsive suite đã được đưa vào source. Do native Vite/Rolldown dependency của `node_modules` Windows không tương thích container Linux và registry install không hoàn tất trong phiên audit, frontend build/E2E cuối cần chạy lại bằng các lệnh trên máy Windows đích.
+Lệnh trên khởi động backend API và frontend development server. Mở địa chỉ frontend do Vite hiển thị trong terminal (mặc định `http://127.0.0.1:5173`).
 
-Không cần `node_modules` trong ZIP; `npm install` sẽ tạo lại dependency đúng nền tảng.
+## Ghi chú
+
+- Không cần commit hoặc chép `node_modules`; `npm install` sẽ cài dependency theo đúng nền tảng.
+- `.env` thật không được commit. Dùng `.env.example` khi cần cấu hình local.
+- Development mặc định có thể dùng PGlite/RAM demo; đặt `DATABASE_URL` nếu muốn dùng PostgreSQL.
+- Phạm vi phân công chính thức của dự án là **4 Sprint**; AI/Analytics trong source là phần bổ sung ngoài bảng phân công chính thức.
